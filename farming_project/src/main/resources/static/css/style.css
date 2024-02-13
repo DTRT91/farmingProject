@@ -1,0 +1,215 @@
+/*** slide ***/
+    html, body {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    *, *:before, *:after {
+     box-sizing: inherit;
+    }
+
+    .clearfix:after {
+     content: '';
+     display: block;
+     clear: both;
+     float: none;
+    }
+
+    .title {
+     margin-bottom: 0;
+      text-align: center;
+       font-size: 30px;
+        color: #333;
+    }
+
+    .link, .link:visited {
+     display: inline-block;
+     margin: 20px 0;
+     color: #555;
+     text-decoration: none;
+     font-weight: bold;
+    }
+
+    .link:hover, .link:focus {
+     color: #9fd6c2;
+    }
+
+    /* container - body */
+    #container {
+     width: 1000px;
+     margin: auto;
+    }
+
+    .slide_wrap {
+     position: relative;
+     width: 400px;
+     margin: auto;
+     padding-bottom: 30px;
+    }
+
+    .slide_box {
+     width: 100%;
+     margin: auto;
+     overflow-x: hidden;
+    }
+
+    .slide_content {
+     display: table;
+     float: left;
+     width: 400px;
+     height: 5px;
+    }
+
+    .slide_content  > img {
+     width: 400px;
+    }
+
+    .slide_content > p {
+     display: block;
+     font-size: 30px;
+     font-weight: bold;
+     color: #555;
+    }
+
+    .slide_btn_box > button {
+     position: absolute; top: 50%;
+     margin-top: -45px;
+     width: 60px; height: 60px;
+     font-size: 16px;
+     color: #999;
+     background: none;
+     border: 1px solid #ddd;
+     cursor: pointer;
+    }
+
+    .slide_btn_box > .slide_btn_prev {
+     left: -100px;
+    }
+
+    .slide_btn_box > .slide_btn_next {
+     right: -100px;
+    }
+
+    .slide_pagination {
+     position: absolute;
+      left: 50%;
+      bottom: 0;
+      list-style: none;
+      margin: 0; padding: 0;
+      transform: translateX(-50%);
+    }
+
+    .slide_pagination .dot {
+     display: inline-block;
+     width: 15px;
+     height: 15px;
+     margin: 0 5px;
+     overflow: hidden;
+     background: #ddd;
+     border-radius: 50%;
+     transition: 0.3s;
+    }
+
+    .slide_pagination .dot.dot_active {
+     background: #333;
+    }
+
+    .slide_pagination .dot a {
+     display: block;
+      width: 100%;
+       height: 100%;
+    }
+
+/*** navi ***/
+  .nab-item{
+  display:block;
+  }
+
+  @media (max-width: 991.98px) {
+      .navbar .navbar-nav .nav-link  {
+          margin-right: 0;
+          padding: 10px 0;
+      }
+
+      .navbar .navbar-nav {
+          border-top: 1px solid #EEEEEE;
+      }
+  }
+  .navbar.sticky-top {
+        top: -100px;
+        transition: .5s;
+  }
+
+  .navbar .navbar-nav .nav-link {
+        margin-right: 35px;
+        padding: 25px 0;
+        color: var(--dark);
+        font-size: 18px;
+        font-weight: 500;
+        outline: none;
+  }
+
+  .navbar .navbar-nav .nav-link:hover,
+  .navbar .navbar-nav .nav-link.active {
+      color: var(--primary);
+  }
+
+  .navbar .dropdown-toggle::after {
+     border: none;
+     content: "\f107";
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     vertical-align: middle;
+     margin-left: 8px;
+  }
+
+
+  @media (min-width: 992px) {
+      .navbar .nav-item .dropdown-menu {
+          display: block;
+          border: none;
+          margin-top: 0;
+          top: 150%;
+          opacity: 0;
+          visibility: hidden;
+          transition: .5s;
+      }
+
+      .navbar .nav-item:hover .dropdown-menu {
+          top: 100%;
+          visibility: visible;
+          transition: .5s;
+          opacity: 1;
+      }
+  }
+
+/*** footer ***/
+  .footer {
+      color: #B0B9AE;
+  }
+
+  .footer .btn.btn-link {
+      display: block;
+      margin-bottom: 5px;
+      padding: 0;
+      text-align: left;
+      color: #B0B9AE;
+      font-weight: normal;
+      text-transform: capitalize;
+      transition: .3s;
+  }
+
+  .footer .btn.btn-link::before {
+      position: relative;
+      content: "\f105";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      margin-right: 10px;
+  }
+
+  .footer .btn.btn-link:hover {
+      color: var(--light);
+      letter-spacing: 1px;
+      box-shadow: none;
+  }

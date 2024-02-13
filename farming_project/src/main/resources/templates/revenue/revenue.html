@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <th:block layout:fragment="userCss">
+    </th:block>
+</head>
+
+<body>
+<!-- Content -->
+<div layout:fragment="content">
+    <form th:action="@{/historySave}" th:object="${cropList}">
+        <div class="form-group">
+            <div class="container">
+                <div class="text-center mx-auto pb-4" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <p class="section-title bg-white text-center text-primary px-3">매출 확인</p>
+                    <h1 class="mb-5">선호하는 농작물의<br>재배가능지역과 매출을<br>확인해보세요.</h1>
+                </div>
+
+                <div class="row gy-5 gx-3">
+                    <div class="col-lg-3 col-md-5 pt-3">
+                        <div class="service-item d-flex flex-column h-60">
+                            <div class="tableTitle">추천 농작물 리스트</div>
+
+                            <div th:each="crop : ${cropList}" class="form-check form-check-inline">
+                                   <input type="radio" name="cropBtn" th:value="${crop.cropName}" class="custom-control-input" >
+                                    <label th:for="${#ids.seq('cropId')}" class="custom-control-label">[(${crop.cropName})]</label>
+                            </div>
+                        </div>
+                    </div>
+                        <div class ="row">
+                        <div class="col-lg-3 col-md-4 pt-3">
+                            <div class="service-item d-block h-100">
+                                <table class="table table-bordered table-hover table-primary" id="myTable">
+                                    <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th class="tableTitle">재배가능지역</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center" id="area">
+                                    <!--               	재배 가능 지역 테이블 생성                          -->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-4 pt-1" data-wow-delay="0.3s">
+                            <div class="service-item h-100">
+                                <div class="page">
+
+                                    <!-- 지도 이미지 자리 -->
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <section class="main">
+        <section style="display: flex; flex-direction: row-reverse;">
+            <button id="open-modal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">매출 확인</button>
+        </section>
+    </section>
+</div>
+
+<div layout:fragment="contentModal"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="insertBtn" value="저장">저장</button>
+                <button type="button" class="btn btn-default close" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- 스크립트 추가 -->
+<th:block layout:fragment="userScript">
+    <script type="text/javascript" th:src="@{/js/revenue/revenue.js}" defer></script>
+</th:block>
+</body>
+
+</html>
