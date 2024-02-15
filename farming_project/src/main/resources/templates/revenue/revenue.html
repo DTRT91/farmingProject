@@ -25,11 +25,10 @@
 
                             <div th:each="crop : ${cropList}" class="form-check form-check-inline">
                                    <input type="radio" name="cropBtn" th:value="${crop.cropName}" class="custom-control-input" >
-                                    <label th:for="${#ids.seq('cropId')}" class="custom-control-label">[(${crop.cropName})]</label>
+                                    <label th:for="${#ids.seq('cropId')}" class="custom-control-label" th:value="${crop.cropName}">>[(${crop.cropName})]</label>
                             </div>
                         </div>
                     </div>
-                        <div class ="row">
                         <div class="col-lg-3 col-md-4 pt-3">
                             <div class="service-item d-block h-100">
                                 <table class="table table-bordered table-hover table-primary" id="myTable">
@@ -53,7 +52,6 @@
 
                                 </div>
                             </div>
-                        </div>
                         </div>
                 </div>
             </div>

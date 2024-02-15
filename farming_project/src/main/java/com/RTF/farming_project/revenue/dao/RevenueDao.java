@@ -14,6 +14,6 @@ public interface RevenueDao {
     int historySave(FarmHistorySaveDto history);
     List<FarmCropDto> getCropList();
 
-    List<FarmCropAreaDto> getAreaList(String areaName);
+    List<FarmCropAreaDto> getAreaList(int cropId);
 
 }

@@ -27,7 +27,7 @@ public class RevenueServiceImpl implements RevenueService {
     }
 
     @Override
-    public List<FarmCropAreaDto> getAreaList(String areaName) { return revenueDao.getAreaList(areaName);
+    public List<FarmCropAreaDto> getAreaList(int cropId) { return revenueDao.getAreaList(cropId);
     }
 
     }

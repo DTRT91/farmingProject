@@ -14,12 +14,9 @@
         VALUES (#{userId}, #{selectCrop}, #{selectCropKor}, #{selectArea}, #{salesResult})
     </insert>
 
-    <select id="getAreaList" parameterType="String" resultType="com.RTF.farming_project.revenue.dto.FarmCropAreaDto">
+    <select id="getAreaList" parameterType="int" resultType="com.RTF.farming_project.revenue.dto.FarmCropAreaDto">
         select rname as areaName
         from rlresource
-        where cid IN
-        (select cid
-        from result
-        where cname=#{areaName})
+        where cid=#{cropId}
     </select>
 </mapper>

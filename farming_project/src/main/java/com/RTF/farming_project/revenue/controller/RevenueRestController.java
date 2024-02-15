@@ -28,10 +28,10 @@ public class RevenueRestController {
 //        return ResponseEntity.status(HttpStatus.OK).body(cropList);
 //    }
 
-    @GetMapping("/areaList/{areaName}")
-    public ResponseEntity getAreaList(@PathVariable String areaName){
+    @GetMapping("/areaList/{selectedCropId}")
+    public ResponseEntity getAreaList(@PathVariable("selectedCropId") Integer cropId){
        List<FarmCropAreaDto> data = new ArrayList<>();
-        data = revenueServiceImpl.getAreaList(areaName);
+        data = revenueServiceImpl.getAreaList(cropId);
 
         return  ResponseEntity.status(HttpStatus.OK).body(data);
     }
