@@ -19,4 +19,10 @@
         from rlresource
         where cid=#{cropId}
     </select>
+
+    <select id="getCropAreaRevenue" parameterType="Map" resultType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto">
+        select revenue as salesResult
+        from result
+        where cname =#{cropName} AND rname=#{areaName}
+    </select>
 </mapper>

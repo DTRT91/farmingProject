@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.html.HTML;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,9 +38,26 @@ public class RevenueRestController {
         return  ResponseEntity.status(HttpStatus.OK).body(data);
     }
 
+    @GetMapping
+    public ResponseEntity getCropAreaRevenue(@PathVariable("params") Map<String,Object> params ,String cropName, String areaName){
+        Map<String,Object> map = new HashMap<String, Object>();
+        if(cropName == null)
+            cropName ="";
+            map.put("cropName", params.get("cropName"));
+        if(areaName == null)
+            areaName = "";
+        map.put("areaName", params.get("areaName"));
+        List<FarmHistorySaveDto> data = new ArrayList<>();
+        data = revenueServiceImpl.getCropAreaRevenue(map);
+
+        return ResponseEntity.status(HttpStatus.OK).body(data);
+    }
+
     @PostMapping("/historySave")
     public ResponseEntity historySave (@RequestBody FarmHistorySaveDto history, HttpSession session) {
         int historySaveResult = revenueServiceImpl.historySave(history);
         return new ResponseEntity(historySaveResult, HttpStatus.OK);
     }
+
+
 }

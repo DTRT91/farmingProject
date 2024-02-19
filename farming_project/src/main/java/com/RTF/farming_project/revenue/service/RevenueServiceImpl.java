@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,12 @@ public class RevenueServiceImpl implements RevenueService {
     public List<FarmCropAreaDto> getAreaList(int cropId) { return revenueDao.getAreaList(cropId);
     }
 
+    @Override
+    public List<FarmHistorySaveDto> getCropAreaRevenue(Map<String, Object> map) {
+        return revenueDao.getCropAreaRevenue(map);
     }
+
+}
 
 
 

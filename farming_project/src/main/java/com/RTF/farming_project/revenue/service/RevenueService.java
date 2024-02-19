@@ -5,6 +5,7 @@ import com.RTF.farming_project.revenue.dto.FarmCropDto;
 import com.RTF.farming_project.revenue.dto.FarmHistorySaveDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RevenueService {
 
@@ -12,4 +13,6 @@ public interface RevenueService {
     int historySave(FarmHistorySaveDto history);
     List<FarmCropDto> getCropList();
     List<FarmCropAreaDto> getAreaList(int cropId);
+
+    List<FarmHistorySaveDto> getCropAreaRevenue(Map<String, Object> map);
 }

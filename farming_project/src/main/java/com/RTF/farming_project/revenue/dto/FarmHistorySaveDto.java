@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class FarmHistorySaveDto {
     private int seq;
     private String userId;
-    private String selectCrop;
-    private String selectCropKor;
+    private String selectedCrop;
+    private String areaName;
     private int salesResult;
 }
