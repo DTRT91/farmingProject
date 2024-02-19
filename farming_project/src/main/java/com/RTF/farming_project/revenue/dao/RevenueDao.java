@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RevenueDao {
@@ -15,5 +16,7 @@ public interface RevenueDao {
     List<FarmCropDto> getCropList();
 
     List<FarmCropAreaDto> getAreaList(int cropId);
+
+    List<FarmHistorySaveDto> getCropAreaRevenue(Map<String, Object> map);
 
 }
