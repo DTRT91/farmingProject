@@ -38,17 +38,10 @@ public class RevenueRestController {
         return  ResponseEntity.status(HttpStatus.OK).body(data);
     }
 
-    @GetMapping
-    public ResponseEntity getCropAreaRevenue(@PathVariable("params") Map<String,Object> params ,String cropName, String areaName){
-        Map<String,Object> map = new HashMap<String, Object>();
-        if(cropName == null)
-            cropName ="";
-            map.put("cropName", params.get("cropName"));
-        if(areaName == null)
-            areaName = "";
-        map.put("areaName", params.get("areaName"));
+    @GetMapping("/getCropAreaRevenue")
+    public ResponseEntity getCropAreaRevenue(@ModelAttribute FarmHistorySaveDto farmHistorySaveDto){
         List<FarmHistorySaveDto> data = new ArrayList<>();
-        data = revenueServiceImpl.getCropAreaRevenue(map);
+        data = revenueServiceImpl.getCropAreaRevenue(farmHistorySaveDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(data);
     }

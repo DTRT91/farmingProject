@@ -15,14 +15,16 @@
     </insert>
 
     <select id="getAreaList" parameterType="int" resultType="com.RTF.farming_project.revenue.dto.FarmCropAreaDto">
-        select rname as areaName
+        select rname as areaName, rid as areaId
         from rlresource
         where cid=#{cropId}
     </select>
 
-    <select id="getCropAreaRevenue" parameterType="Map" resultType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto">
-        select revenue as salesResult
-        from result
-        where cname =#{cropName} AND rname=#{areaName}
+    <select id="getCropAreaRevenue" parameterType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto" resultType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto">
+        select DISTINCT rresource.revenue as salesResult, result.revenue as preSalesResult, rresource.year as years
+        from rresource
+        LEFT JOIN result on rresource.cid = result.cid
+        where rresource.cid =#{cropId} AND rresource.rid=#{areaId}
+        order by rresource.year
     </select>
 </mapper>

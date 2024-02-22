@@ -4,10 +4,8 @@ import com.RTF.farming_project.revenue.dto.FarmCropAreaDto;
 import com.RTF.farming_project.revenue.dto.FarmCropDto;
 import com.RTF.farming_project.revenue.dto.FarmHistorySaveDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface RevenueDao {
@@ -17,6 +15,6 @@ public interface RevenueDao {
 
     List<FarmCropAreaDto> getAreaList(int cropId);
 
-    List<FarmHistorySaveDto> getCropAreaRevenue(Map<String, Object> map);
+    List<FarmHistorySaveDto> getCropAreaRevenue(FarmHistorySaveDto farmHistorySaveDto);
 
 }

@@ -6,5 +6,6 @@ import lombok.Data;
 public class FarmCropAreaDto {
     private int seq;
     private int cropId;
+    private String areaId;
     private String areaName;
 }

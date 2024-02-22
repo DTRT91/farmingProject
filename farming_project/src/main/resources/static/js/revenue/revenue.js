@@ -1,6 +1,6 @@
 const cropBtn = document.querySelectorAll(".custom-control-input");
 const area = document.querySelector("#area");
-const modal = new bootstrap.Modal(document.getElementById('myModal')); //모달 버튼
+const modal = new bootstrap.Modal(document.getElementById('myModal'));//모달 버튼
 const openModalBtn = document.querySelector("#open-modal");
 
 //작물 버튼 클릭
@@ -10,15 +10,13 @@ cropBtn.forEach(function(event) {
         const cropLabel = document.getElementsByClassName('custom-control-label');
         const openModalBtn = document.querySelector("#open-modal");
 
-        openModalBtn.dataset.selectedCrop = selectedCrop;
-
-        area.innerHTML ="";
+        area.innerHTML ='';
 
         for(let i =0; i<cropLabel.length; i++){
             if(cropLabel[i].getAttribute("value") === selectedCrop){
                 console.log(cropLabel[i].getAttribute("for"));
                 const selectedCropId = (i+1);
-                console.log(selectedCropId);
+                 openModalBtn.dataset.selectedCropId = selectedCropId;
                 getAreaList(selectedCropId);
             }
         }
@@ -50,7 +48,7 @@ function showAreaList(data){
         const newButton = document.createElement("input");
         newButton.setAttribute("type", "button");
         newButton.classList.add("btn-area", "btn");
-        newButton.setAttribute("value",data[i].areaName);
+        newButton.setAttribute('value',data[i].areaName);
         newButton.textContent = data[i].areaName;
         newCell.appendChild(newButton);
         }
@@ -58,11 +56,20 @@ function showAreaList(data){
 
         areaButtons.forEach((item)=>{
             item.addEventListener("click",(e)=>{
-                openModalBtn.dataset.selectedArea = e.target.value;
+            const selectedArea = e.target.value;
+            for(let i=0; i<data.length; i++){
+            if(selectedArea == data[i].areaName){
+            openModalBtn.dataset.areaId = data[i].areaId;
+             console.log(data[i].areaId);
+            }
+            }
+
             });
         });
     }
 }
+
+
 
 function showCropInfo(selectedCropId){
 const areaImage = document.querySelector(".page");
@@ -83,38 +90,17 @@ areaImage.innerHTML ='';
     }
 }
 
-function getSelectedArea(){
-const areaTable = document.querySelector("#area");
-openModalBtn.dataset.selectedArea = selectedArea.value;;
+openModalBtn.addEventListener("click", ()=>{
+        const cropId = openModalBtn.dataset.selectedCropId.trim();
+        	console.log(cropId);
+        	const areaId = openModalBtn.dataset.areaId;
+        	console.log(areaId);
+        	const insertBtn = document.querySelector("#insertBtn");
+        	getCropAreaRevenue(cropId, areaId);
 
-areaTable.addEventListener('click', ()=>{
-    getSelectedArea();
-    console.log()
-})
-}
+        	modal.show();
+});
 
-
-
-function modalOpen(){
-	const selectedCrop = openModalBtn.dataset.selectedCrop;
-	console.log(selectedCrop);
-	const selectedArea = openModalBtn.dataset.selectedArea;
-	console.log(selectedArea);
-    const params = {
-                "areaName" : selectedArea,
-                "cropName" : selectedCrop
-            }
-
-		openModalBtn.addEventListener("click", ()=>{
-		modal.show();
-        getCropAreaRevenue(params);
-
-          const insertBtn = document.querySelector("#insertBtn");
-		});
-	}
-
-
-function modalClose(){
 	const closeModalBtn = document.querySelectorAll(".close");
 	closeModalBtn.forEach( (e)=>{
 		e.addEventListener('click', ()=>{
@@ -122,12 +108,12 @@ function modalClose(){
 			modal.hide();
 		});
 	});
-}
+
 
 //매출 가져오는 로직
-function getCropAreaRevenue(params){
+function getCropAreaRevenue(cropId, areaId){
 
-fetch(`/getCropAreaRevenue/${params}`, {
+fetch(`/getCropAreaRevenue/?cropId=${cropId}&areaId=${areaId}`, {
     Method : "GET",
     headers : {
     "Content-Type" : "application/json",
@@ -136,48 +122,87 @@ fetch(`/getCropAreaRevenue/${params}`, {
     .then((response) => response.json())
     .then(data => {
     console.log(data);
-//    drawChart();
+    drawChart(data);
     })
     .catch((e) => {
     console.log(e);
     });
 }
-modalOpen();
-modalClose();
 
-////차트 그리는 로직
-//function drawChart(cropAreaDto)
-//const ctx = document.getElementById('myChart').getContext('2d');
-//          const myChart = new Chart(ctx, {
-//              type: 'line',
-//              data: {
-//                  labels: ['Green'],
-//                  datasets: [{
-//                      label: 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
-//                             2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023,
-//                      data: [12, 19, 3, 5, 2, 3],
-//                      backgroundColor: [
-//                          'rgba(75, 192, 192, 0.2)'
-//                      ],
-//                      borderColor: [
-//                          'rgba(75, 192, 192, 1)'
-//                      ],
-//                      borderWidth: 1
-//                  }]
-//              },
-//              options: {
-//                  scales: {
-//                      y: {
-//                          beginAtZero: false
-//                      }
-//                  }
-//              }
-//          });
-//
-//
-//
+//차트 그리는 로직
+function drawChart(data){
+//const divisionData = data.map((value) => value / 10000);
+//console.log(divisionData);
+var years = new Array();
+var salesResult = new Array();
+console.log(data[0].salesResult);
+for(var i=0; i<data.length; i++){
+    years[i] = data[i].years;
+}
+years[data.length] = 2023;
+console.log(years[data.length]);
+for(var i=0; i<data.length; i++){
+    salesResult[i] = data[i].salesResult / 10000;
+}
+salesResult[data.length] = data[0].preSalesResult;
+console.log(salesResult[data.length]);
 
-//저장 버튼 클릭
-//insertBtn.addEventListener('click', ()=>{
-//
-//});
+const backgroundColor = [];
+for (i=0; i< data.length; i++) {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    backgroundColor.push('rgba('+r+', '+g+', '+b+', 0.2)');
+}
+
+	let existingChart = Chart.getChart('myChart');
+	if (existingChart) {
+		existingChart.destroy();
+		}
+
+	var dbData = {
+            			  labels: years,
+            			  datasets: [
+            			    {
+            			      label: "매출 추이(10a, 원)",
+            			      data: salesResult,
+            			      fill: false,
+            			      borderColor: backgroundColor,
+            			      tension: 0.3,
+            			    },
+            			  ],
+            			};
+var ctx = document.getElementById('myChart').getContext('2d');
+          const myChart = new Chart(ctx, {
+              type: 'line',
+              data: dbData,
+              options: {}
+          });
+}
+
+
+저장 버튼 클릭
+insertBtn.addEventListener('click', ()=>{
+    fetch(`/historySave)`, {
+        Method : "POST",
+        headers : {
+        "Content-Type" : "application/json",
+        },
+        body : historySave,
+        })
+            .then((response) => response.json())
+            .then(data => {
+            console.log(data);
+            if(data > 0){
+            alert("등록이 완료되었습니다.");
+            modal.hide();
+            }else {
+            alert("등록에 실패하였습니다.");
+            modal.hide();
+            }
+            })
+            .catch((e) => {
+            console.log(e)
+            });
+    }
+

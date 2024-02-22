@@ -6,11 +6,8 @@ import com.RTF.farming_project.revenue.dto.FarmCropDto;
 import com.RTF.farming_project.revenue.dto.FarmHistorySaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +29,8 @@ public class RevenueServiceImpl implements RevenueService {
     }
 
     @Override
-    public List<FarmHistorySaveDto> getCropAreaRevenue(Map<String, Object> map) {
-        return revenueDao.getCropAreaRevenue(map);
+    public List<FarmHistorySaveDto> getCropAreaRevenue(FarmHistorySaveDto farmHistorySaveDto) {
+        return revenueDao.getCropAreaRevenue(farmHistorySaveDto);
     }
 
 }
