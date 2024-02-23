@@ -10,8 +10,8 @@
     </select>
 
     <insert id="historySave" parameterType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto">
-        INSERT INTO salesHistory (userId, selectCrop, selectCropKor, selectArea, salesResult)
-        VALUES (#{userId}, #{selectCrop}, #{selectCropKor}, #{selectArea}, #{salesResult})
+        INSERT INTO salesHistory (userId, cropId, areaId, salesResult)
+        VALUES (0, #{cropId}, #{areaId}, #{salesResult})
     </insert>
 
     <select id="getAreaList" parameterType="int" resultType="com.RTF.farming_project.revenue.dto.FarmCropAreaDto">

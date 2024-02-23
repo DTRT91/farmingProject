@@ -57,6 +57,7 @@ function showAreaList(data){
         areaButtons.forEach((item)=>{
             item.addEventListener("click",(e)=>{
             const selectedArea = e.target.value;
+            openModalBtn.dataset.selectedArea = selectedArea;
             for(let i=0; i<data.length; i++){
             if(selectedArea == data[i].areaName){
             openModalBtn.dataset.areaId = data[i].areaId;
@@ -112,6 +113,8 @@ openModalBtn.addEventListener("click", ()=>{
 
 //매출 가져오는 로직
 function getCropAreaRevenue(cropId, areaId){
+//insertBtn.dataset.cropId = cropId;
+//insertBtn.dataset.areaId = areaId;
 
 fetch(`/getCropAreaRevenue/?cropId=${cropId}&areaId=${areaId}`, {
     Method : "GET",
@@ -131,8 +134,6 @@ fetch(`/getCropAreaRevenue/?cropId=${cropId}&areaId=${areaId}`, {
 
 //차트 그리는 로직
 function drawChart(data){
-//const divisionData = data.map((value) => value / 10000);
-//console.log(divisionData);
 var years = new Array();
 var salesResult = new Array();
 console.log(data[0].salesResult);
@@ -146,6 +147,8 @@ for(var i=0; i<data.length; i++){
 }
 salesResult[data.length] = data[0].preSalesResult;
 console.log(salesResult[data.length]);
+
+//insertBtn.dataset.salesResult = salesResult;
 
 const backgroundColor = [];
 for (i=0; i< data.length; i++) {
@@ -181,28 +184,42 @@ var ctx = document.getElementById('myChart').getContext('2d');
 }
 
 
-저장 버튼 클릭
-insertBtn.addEventListener('click', ()=>{
-    fetch(`/historySave)`, {
-        Method : "POST",
-        headers : {
-        "Content-Type" : "application/json",
-        },
-        body : historySave,
-        })
-            .then((response) => response.json())
-            .then(data => {
-            console.log(data);
-            if(data > 0){
-            alert("등록이 완료되었습니다.");
-            modal.hide();
-            }else {
-            alert("등록에 실패하였습니다.");
-            modal.hide();
-            }
-            })
-            .catch((e) => {
-            console.log(e)
-            });
-    }
+////저장 버튼 클릭
+//insertBtn.addEventListener('click', ()=>{
+//    historySave();
+//    });
+//
+//function historySave(){
+//    const cropId = insertBtn.dataset.cropId.value;
+//    const areaId = insertBtn.dataset.areaId.value;
+//    const salesResult = insertBtn.dataset.salesResult;
+//
+//    const historySaveData = {
+//        'cropId' : cropId,
+//        'areaId' : areaId,
+//        'salesResult' :  salesResult,
+//    }
+//    fetch(`/historySave`, {
+//            method : 'POST',
+//            headers : {
+//            'Content-Type' : 'application/json',
+//            },
+//            body : JSON.stringify(historySaveData),
+//            })
+//                .then((response) => response.json())
+//                .then(data => {
+//                console.log(data);
+//                if(data > 0){
+//                alert('등록이 완료되었습니다.');
+//                modal.hide();
+//                }else {
+//                alert('등록에 실패하였습니다.');
+//                modal.hide();
+//                }
+//                })
+//                .catch((e) => {
+//                console.log(e)
+//                });
+//    }
+
 

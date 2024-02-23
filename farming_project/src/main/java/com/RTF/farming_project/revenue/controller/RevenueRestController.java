@@ -48,8 +48,8 @@ public class RevenueRestController {
 
     @PostMapping("/historySave")
     public ResponseEntity historySave (@RequestBody FarmHistorySaveDto history, HttpSession session) {
-        int historySaveResult = revenueServiceImpl.historySave(history);
-        return new ResponseEntity(historySaveResult, HttpStatus.OK);
+        revenueServiceImpl.historySave(history);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 
