@@ -1,5 +1,4 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
-
 <!--headerFragment 선언-->
 <div th:fragment="headerFragment">
     <header id="header">
@@ -25,6 +24,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">회원관리</a>
                         <div class="dropdown-menu bg-light m-0">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" class="dropdown-item">로그인</button>
+                            <a th:href="@{mypage}" class="dropdown-item">마이 페이지</a>
                         </div>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h1 class="modal-title">로그인</h1>
+                    <h1 class="modal-title" >로그인</h1>
                 </div>
                 <div class="modal-body">
-                    <th:block th:replace="~{login/login :: loginModal}"></th:block>
+                    <th:block th:replace="~{/login/login :: loginModal}"></th:block>
                 </div>
             </div>
         </div>
