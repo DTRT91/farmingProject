@@ -8,8 +8,8 @@
 </head>
 
 
-<<th:block th:fragment="setLogin(login)">
-    <body>
+<th:block th:fragment="loginModal">
+
     <div class="member_login">
             <div class="member_login_input">
                 <input type="text" id="userId" name="userId" placeholder="아이디" >
@@ -30,17 +30,8 @@
             <div class="find_password">
                 <a href="/forgot-password">아이디 또는 비밀번호를 잊으셨나요?</a>
             </div>
-
-            <div class="login_api">
-                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
-            </div>
-
-            <div class="login_api">
-                <a href="/oauth2/authorization/google"><img src="/image/google_login_button.png"></a>
-            </div>
-
     </div>
-</div>
+</th:block>
 
 <th:block layout:fragment="userScript">
     <script type="text/javascript" th:src="@{/js/login/login.js}" defer></script>
