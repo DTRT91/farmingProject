@@ -1,3 +1,10 @@
+//var myModal = new bootstrap.Modal(document.getElementById('loginModal'));
+//
+//const modalBtn = document.querySelector('.dropdown-item');
+//modalBtn.addEventListener('click', => (
+//myModal.show();
+//))
+
 const login = {
 
     init: function() {
