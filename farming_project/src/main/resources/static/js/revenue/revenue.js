@@ -70,8 +70,6 @@ function showAreaList(data){
     }
 }
 
-
-
 function showCropInfo(selectedCropId){
 const areaImage = document.querySelector(".page");
 const cropLabel = document.getElementsByClassName('custom-control-label');
@@ -91,6 +89,7 @@ areaImage.innerHTML ='';
     }
 }
 
+//매출 확인 버튼
 openModalBtn.addEventListener("click", ()=>{
         const cropId = openModalBtn.dataset.selectedCropId.trim();
         	console.log(cropId);
@@ -102,6 +101,7 @@ openModalBtn.addEventListener("click", ()=>{
         	modal.show();
 });
 
+//닫기버튼
 	const closeModalBtn = document.querySelectorAll(".close");
 	closeModalBtn.forEach( (e)=>{
 		e.addEventListener('click', ()=>{

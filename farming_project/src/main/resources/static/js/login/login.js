@@ -1,9 +1,13 @@
-//var myModal = new bootstrap.Modal(document.getElementById('loginModal'));
-//
-//const modalBtn = document.querySelector('.dropdown-item');
-//modalBtn.addEventListener('click', => (
-//myModal.show();
-//))
+const modal = new bootstrap.Modal(document.getElementById('loginModal'));//모달 버튼
+
+//닫기 버튼 클릭
+const closeModalBtn = document.querySelectorAll(".close");
+	closeModalBtn.forEach( (e)=>{
+		e.addEventListener('click', ()=>{
+			console.log("닫기 버튼 활성화");
+			modal.hide();
+		});
+	});
 
 const login = {
 
