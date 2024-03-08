@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoginDto {
     private int seq;
-    private int userId;
-    private String userName;
-    private String phone;
-    private String email;
+    private int memberId;
+    private String memberPassword;
+    private String memberName;
 }
