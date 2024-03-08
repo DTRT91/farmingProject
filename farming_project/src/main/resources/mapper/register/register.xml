@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RTF.farming_project.register.dao.RegisterDao">
+
+    <insert id="register" parameterType="com.RTF.farming_project.register.dto.RegisterDto">
+        INSERT INTO users (userName, userId, password, email, phone, age, birthday)
+        VALUES
+        (
+        #{userName} as userName
+        ,#{userId} as userId
+        ,#{password} as password
+        ,#{email} as email
+        ,#{phone} as phone
+        ,#{age} as age
+        ,#{birthday} as birthday
+        )
+    </insert>
+</mapper>

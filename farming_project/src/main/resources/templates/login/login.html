@@ -3,34 +3,41 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
 <head>
-    <th:block layout:fragment="userCss"></th:block>
-</head>
-<th:block th:fragment="loginModal">
-        <div class="member_login">
-            <div class="form-floating gap-2 col-8 mx-auto">
-                <div class="member_login_input">
-                    <input type="text" id="userId" name="userId" placeholder="아이디" >
-                </div>
-
-                <div class="member_login_input">
-                  <input type="password" id="password" name="password" placeholder="비밀번호">
-                </div>
-
-                <div class="member_login_btn">
-
-                    <input type="button" class="btn btn-secondary" id="btn-login" value="로그인">
-
-                    <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='/register/register'">
-
-                </div>
-
-                <div class="find_password">
-                    <a href="/forgot-password">아이디 또는 비밀번호를 잊으셨나요?</a>
-                </div>
-            </div>
-        </div>
-</th:block>
-    <th:block layout:fragment="userScript">
+    <th:block layout:fragment="userCss">
     </th:block>
+</head>
+
+
+<th:block th:fragment="loginModal">
+
+    <div class="member_login">
+            <div class="member_login_input">
+                <input type="text" id="memberId" name="memberId" placeholder="아이디" >
+            </div>
+
+            <div class="member_login_input">
+                <input type="password" id="memberPassword" name="memberPassword" placeholder="비밀번호">
+            </div>
+
+            <div class="member_login_btn">
+
+                <input type="button" class="btn btn-secondary" id="btn-login" value="로그인">
+
+                <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='register/register'">
+
+            </div>
+
+            <div class="find_password">
+                <a href="/forgot-password">아이디 또는 비밀번호를 잊으셨나요?</a>
+            </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="userScript">
+    <script type="text/javascript" th:src="@{/js/login/login.js}" defer></script>
+</th:block>
+
+</body>
+</th:block>
 </html>
 
