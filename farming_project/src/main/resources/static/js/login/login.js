@@ -1,57 +1,61 @@
-const modal = new bootstrap.Modal(document.getElementById('loginModal'));//모달 버튼
-
-//닫기 버튼 클릭
-const closeModalBtn = document.querySelectorAll(".close");
-	closeModalBtn.forEach( (e)=>{
-		e.addEventListener('click', ()=>{
-			console.log("닫기 버튼 활성화");
-			modal.hide();
-		});
-	});
-
 const login = {
 
-    init: function() {
+  init: function() {
     this.bindEvent();
-    }
+  },
 
-    bindEvent: function() {
+  bindEvent: function() {
+    console.log(document.querySelector('#btn-login'))
     document.querySelector('#btn-login').addEventListener('click', this.login.bind(this));
-    },
+  },
 
-    login: function(){
+  login: function() {
+    console.log('btn-login clicked');
     const loginUser = this.getLoginInfo();
+    console.log(loginUser);
 
-        fetch(`/login/verify`, {
-        method: 'POST',
-        headers: {
-            'Content-type' : 'application/json',
-        },
-        body: JSON.stringify(loginUser)
-        })
-        .then(response => response.text())
-        .then(data => {
-        if(!data) return alert('아이디와 비밀번호를 확인해주세요');
-        location.href ='/main';
-        })
-        .catch(error => {
-        console.log(error);
-        return alert('아이디와 비밀번호를 확인하세요');
-        })
+    fetch(`/login/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(loginUser)
+    })
+    .then(response => response.text())
+     .then(data => {
+         const parsedData = JSON.parse(data);
+         console.log(parsedData)
 
-    },
+      if(parsedData.message) {
+        console.log('fail')
+        if(parsedData.message === 'Invalid password') return alert('비밀번호를 확인하세요');
+        else if(parsedData.message === 'No user registered with this details!') return alert('아이디와 비밀번호를 확인하세요');
+      }
+      else {
+        console.log('success')
+        console.log(data);
 
-    getLoginInfo: function() {
-    const id = document.querySelector('#userId').value;
-    const password = document.querySelector('#password').value;
+        location.href = '/main';
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      return alert('아이디와 비밀번호를 확인하세요');
+    })
+  },
 
-    const loginUser ={
-        id,
-        password
+  getLoginInfo: function() {
+    const memberId = document.querySelector('#memberId').value;
+    console.log(memberId);
+    const memberPassword = document.querySelector('#memberPassword').value;
+
+    const loginUser = {
+      memberId,
+      memberPassword
     }
 
     return loginUser;
-    },
+  },
 }
 
 login.init();

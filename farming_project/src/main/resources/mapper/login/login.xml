@@ -2,13 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.RTF.farming_project.login.dao.LoginDao">
 
-    <select id="verifyUser" parameterType="com.RTF.farming_project.login.dto.LoginDto">
-        SELECT
-            'seq' as seq,
-            'userId' as memberId,
-            'userName' as memberName,
-            'password' as memberPassword,
-        FROM users
-        WHERE userid =#{userId}
+    <select id="verifyUser" parameterType="com.RTF.farming_project.login.dto.LoginRequestDto" resultType="com.RTF.farming_project.login.dto.LoginDto">
+        SELECT *
+        FROM USERS
+        WHERE userid = #{memberId}
     </select>
 </mapper>

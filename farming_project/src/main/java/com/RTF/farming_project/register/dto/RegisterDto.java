@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterDto {
     private int seq;
-    private String userId;
+    private String username;
+    private String userid;
     private String password;
-    private String userName;
-    private String phone;
     private String email;
+    private String phone;
+    private String age;
     private String birthday;
 }

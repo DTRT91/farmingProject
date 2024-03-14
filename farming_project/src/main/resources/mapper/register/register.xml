@@ -3,16 +3,7 @@
 <mapper namespace="com.RTF.farming_project.register.dao.RegisterDao">
 
     <insert id="register" parameterType="com.RTF.farming_project.register.dto.RegisterDto">
-        INSERT INTO users (userName, userId, password, email, phone, age, birthday)
-        VALUES
-        (
-        #{userName} as userName
-        ,#{userId} as userId
-        ,#{password} as password
-        ,#{email} as email
-        ,#{phone} as phone
-        ,#{age} as age
-        ,#{birthday} as birthday
-        )
+        INSERT INTO USERS (username, userid, password, email, phone, age, birthday)
+        VALUES (#{username}, #{userid}, #{password}, #{email}, #{phone}, #{age}, #{birthday})
     </insert>
 </mapper>
