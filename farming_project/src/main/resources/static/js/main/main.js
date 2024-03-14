@@ -100,4 +100,12 @@ document.addEventListener("DOMContentLoaded", function () {
           slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
         });
       });
+
+      //login session
+        console.log(loginUser);
+        if(loginUser){
+        document.querySelector('#loginModalBtn').classList.add('d-none');
+        document.querySelector('#logout').classList.remove('d-none');
+        console.log("로그인 완료");
+        }
     });

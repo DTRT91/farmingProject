@@ -2,6 +2,7 @@ package com.RTF.farming_project.login.controller;
 
 //import com.RTF.farming_project.common.util.ShaUtil;
 import com.RTF.farming_project.login.dto.LoginDto;
+import com.RTF.farming_project.login.dto.LoginRequestDto;
 import com.RTF.farming_project.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,19 +19,21 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/login")
-public class LoginController {
-    private static LoginService loginServiceImpl;
+public class LoginRestController {
+    private final LoginService loginServiceImpl;
 
     @GetMapping
     public String login(){ return "/login/login"; }
 
     @PostMapping("/verify")
     @ResponseBody
-    public ResponseEntity verifyUser (@RequestBody LoginDto loginDto, Model model, HttpSession session) {
-        LoginDto loginUser = loginServiceImpl.verifyUser(loginDto);
+    public ResponseEntity verifyUser (@RequestBody LoginRequestDto loginRequestDto, Model model, HttpSession session) {
+
+        LoginDto loginUser = (LoginDto) loginServiceImpl.verifyUser(loginRequestDto);
 
         if(loginUser != null){
             session.setAttribute("loginUser", loginUser);
+            session.getMaxInactiveInterval();
         }
         return new ResponseEntity(loginUser, HttpStatus.OK);
     }

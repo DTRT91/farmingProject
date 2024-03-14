@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <th:block layout:fragment="userCss">
+    </th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container slider">
+        <div class="col-lg-3 col-md-5 pt-3">
+            <!-- 테이블로 뿌릴 히스토리 데이터 가져오기
+<!--            <div class="service-item d-flex flex-column h-60">-->
+<!--                <div class="tableTitle">나의 매출 히스토리</div>-->
+
+<!--                <div th:each="crop : ${cropList}" class="form-check form-check-inline">-->
+<!--                    <input type="text" name="historyRevenue" th:value="${crop.cropName}" class="custom-control-input" >-->
+<!--                    <label th:for="${#ids.seq('cropId')}" class="custom-control-label" th:value="${crop.cropName}">[(${crop.cropName})]</label>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+</div>
+
+<th:block layout:fragment="userScript">
+    <script type="text/javascript" th:src="@{/js/mypage/mypage.js}" defer></script>
+</th:block>
+</body>
+
+</html>

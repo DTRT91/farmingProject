@@ -94,7 +94,7 @@ register();
 });
 
 function register(){
-const username = document.querySelector('#username').value.trim();
+const username = document.querySelector('#userName').value.trim();
 const userId = document.querySelector('#userId').value.trim();
 const password = document.querySelector('#password').value.trim();
 const email = document.querySelector('#email').value.trim();
@@ -104,7 +104,7 @@ const birthday = document.querySelector('#birthday').value.trim();
 
 const registerUser = {
     'username' : username,
-    'userId' : userId,
+    'userid' : userId,
     'password' : password,
     'email' : email,
     'phone' : phone,
