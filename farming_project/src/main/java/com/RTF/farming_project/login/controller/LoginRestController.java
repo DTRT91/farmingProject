@@ -37,4 +37,13 @@ public class LoginRestController {
         }
         return new ResponseEntity(loginUser, HttpStatus.OK);
     }
+
+    @PostMapping("/logout")
+    @ResponseBody
+    public ResponseEntity logout (@RequestBody LoginRequestDto loginRequestDto, Model model, HttpSession session){
+        LoginDto loginUser = new LoginDto();
+        session.removeAttribute("LoginUser");
+        session.invalidate();
+        return new ResponseEntity(loginUser, HttpStatus.OK);
+    }
 }

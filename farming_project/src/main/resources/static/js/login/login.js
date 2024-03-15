@@ -7,6 +7,7 @@ const login = {
   bindEvent: function() {
     console.log(document.querySelector('#btn-login'))
     document.querySelector('#btn-login').addEventListener('click', this.login.bind(this));
+    document.querySelector('#logout').addEventListener('click', this.logout.bind(this));
   },
 
   login: function() {
@@ -34,7 +35,6 @@ const login = {
       else {
         console.log('success')
         console.log(data);
-
         location.href = '/main';
       }
     })
@@ -43,6 +43,27 @@ const login = {
       return alert('아이디와 비밀번호를 확인하세요');
     })
   },
+
+  logout: function(){
+  console.log('logout 버튼 클릭');
+  const loginUser = this.getLoginInfo();
+  fetch(`/login/logout`, {
+    method: 'POST',
+       headers: {
+         'Content-type': 'application/json',
+       },
+       body: JSON.stringify(loginUser)
+     })
+     .then(response => response.json())
+      .then(data => {
+          console.log(data)
+          location.href = '/main';
+      })
+      .catch(error => {
+            console.log(error)
+            return alert('아이디와 비밀번호를 확인하세요');
+      })
+    },
 
   getLoginInfo: function() {
     const memberId = document.querySelector('#memberId').value;
@@ -56,6 +77,8 @@ const login = {
 
     return loginUser;
   },
+
+
 }
 
 login.init();
