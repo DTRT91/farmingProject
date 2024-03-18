@@ -1,5 +1,6 @@
 package com.RTF.farming_project.revenue.controller;
 
+import com.RTF.farming_project.login.dto.LoginDto;
 import com.RTF.farming_project.revenue.dto.FarmCropDto;
 import com.RTF.farming_project.revenue.service.RevenueService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,9 @@ public class RevenueController {
 
 
     @GetMapping("/revenue")
-    public String revenue(Model model){
+    public String revenue(Model model, HttpSession session){
+
+        LoginDto loginUser = (LoginDto) session.getAttribute("loginUser");
 
         List<FarmCropDto> cropList = new ArrayList<>();
         FarmCropDto farmCropDto = new FarmCropDto();
@@ -33,6 +37,7 @@ public class RevenueController {
 
         model.addAttribute("cropId", farmCropDto.getCropId());
         model.addAttribute("cropList", cropList);
+        model.addAttribute("loginUser", loginUser);
         return "/revenue/revenue";
     }
 

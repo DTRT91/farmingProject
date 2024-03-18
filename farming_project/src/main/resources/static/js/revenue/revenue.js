@@ -113,8 +113,9 @@ openModalBtn.addEventListener("click", ()=>{
 
 //매출 가져오는 로직
 function getCropAreaRevenue(cropId, areaId){
-//insertBtn.dataset.cropId = cropId;
-//insertBtn.dataset.areaId = areaId;
+const insertBtn = document.querySelector("#insertBtn");
+insertBtn.dataset.cropId = cropId;
+insertBtn.dataset.areaId = areaId;
 
 fetch(`/getCropAreaRevenue/?cropId=${cropId}&areaId=${areaId}`, {
     Method : "GET",
@@ -148,7 +149,7 @@ for(var i=0; i<data.length; i++){
 salesResult[data.length] = data[0].preSalesResult;
 console.log(salesResult[data.length]);
 
-//insertBtn.dataset.salesResult = salesResult;
+insertBtn.dataset.salesResult = salesResult;
 
 const backgroundColor = [];
 for (i=0; i< data.length; i++) {
@@ -184,42 +185,43 @@ var ctx = document.getElementById('myChart').getContext('2d');
 }
 
 
-////저장 버튼 클릭
-//insertBtn.addEventListener('click', ()=>{
-//    historySave();
-//    });
-//
-//function historySave(){
-//    const cropId = insertBtn.dataset.cropId.value;
-//    const areaId = insertBtn.dataset.areaId.value;
-//    const salesResult = insertBtn.dataset.salesResult;
-//
-//    const historySaveData = {
-//        'cropId' : cropId,
-//        'areaId' : areaId,
-//        'salesResult' :  salesResult,
-//    }
-//    fetch(`/historySave`, {
-//            method : 'POST',
-//            headers : {
-//            'Content-Type' : 'application/json',
-//            },
-//            body : JSON.stringify(historySaveData),
-//            })
-//                .then((response) => response.json())
-//                .then(data => {
-//                console.log(data);
-//                if(data > 0){
-//                alert('등록이 완료되었습니다.');
-//                modal.hide();
-//                }else {
-//                alert('등록에 실패하였습니다.');
-//                modal.hide();
-//                }
-//                })
-//                .catch((e) => {
-//                console.log(e)
-//                });
-//    }
+//저장 버튼 클릭
+insertBtn.addEventListener('click', ()=>{
+    historySave();
+    });
+
+function historySave(){
+    const cropId = insertBtn.dataset.cropId.value;
+    const areaId = insertBtn.dataset.areaId.value;
+    const salesResult = insertBtn.dataset.salesResult;
+
+
+    const historySaveData = {
+        'cropId' : cropId,
+        'areaId' : areaId,
+        'salesResult' :  salesResult,
+    }
+    fetch(`/historySave`, {
+            method : 'POST',
+            headers : {
+            'Content-Type' : 'application/json',
+            },
+            body : JSON.stringify(historySaveData),
+            })
+                .then((response) => response.json())
+                .then(data => {
+                console.log(data);
+                if(data > 0){
+                alert('저장되었습니다.');
+                modal.hide();
+                }else {
+                alert('저장에 실패하였습니다.');
+                modal.hide();
+                }
+                })
+                .catch((e) => {
+                console.log(e)
+                });
+    }
 
 
