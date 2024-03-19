@@ -3,6 +3,7 @@ const area = document.querySelector("#area");
 const modal = new bootstrap.Modal(document.getElementById('myModal'));//모달 버튼
 const openModalBtn = document.querySelector("#open-modal");
 
+
 //작물 버튼 클릭
 cropBtn.forEach(function(event) {
     event.addEventListener('click', (e) => {
@@ -115,6 +116,7 @@ openModalBtn.addEventListener("click", ()=>{
 function getCropAreaRevenue(cropId, areaId){
 const insertBtn = document.querySelector("#insertBtn");
 insertBtn.dataset.cropId = cropId;
+console.log("로직에서 버튼에 넣은 값" + insertBtn.dataset.cropId);
 insertBtn.dataset.areaId = areaId;
 
 fetch(`/getCropAreaRevenue/?cropId=${cropId}&areaId=${areaId}`, {
@@ -191,14 +193,19 @@ insertBtn.addEventListener('click', ()=>{
     });
 
 function historySave(){
-    const cropId = insertBtn.dataset.cropId.value;
-    const areaId = insertBtn.dataset.areaId.value;
-    const salesResult = insertBtn.dataset.salesResult;
+    const userId = loginUser.userid;
+    const cropId = insertBtn.dataset.cropId;
+    console.log(cropId);
+    const areaId = insertBtn.dataset.areaId;
+    console.log(areaId);
+    const salesResult = parseFloat(insertBtn.dataset.salesResult);
+    console.log(salesResult);
 
 
     const historySaveData = {
         'cropId' : cropId,
         'areaId' : areaId,
+        'userId' : userId,
         'salesResult' :  salesResult,
     }
     fetch(`/historySave`, {
@@ -208,7 +215,6 @@ function historySave(){
             },
             body : JSON.stringify(historySaveData),
             })
-                .then((response) => response.json())
                 .then(data => {
                 console.log(data);
                 if(data > 0){
@@ -223,5 +229,16 @@ function historySave(){
                 console.log(e)
                 });
     }
+
+     console.log(loginUser);
+            if(loginUser != null){
+            document.querySelector('#loginModalBtn').classList.add('d-none');
+            document.querySelector('#logout').classList.remove('d-none');
+            console.log("로그인 완료");
+            } else if (loginUser == null) {
+            document.querySelector('#loginModalBtn').classList.remove('d-none');
+            document.querySelector('#logout').classList.add('d-none');
+            console.log('로그아웃 완료');
+            }
 
 

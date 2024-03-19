@@ -38,7 +38,8 @@ public class RevenueController {
         model.addAttribute("cropId", farmCropDto.getCropId());
         model.addAttribute("cropList", cropList);
         model.addAttribute("loginUser", loginUser);
-        return "/revenue/revenue";
+        log.info("세션 확인" + loginUser.getUserid());
+        return "revenue/revenue";
     }
 
 }
