@@ -215,6 +215,7 @@ function historySave(){
             },
             body : JSON.stringify(historySaveData),
             })
+                .then((response) => response.text())
                 .then(data => {
                 console.log(data);
                 if(data > 0){

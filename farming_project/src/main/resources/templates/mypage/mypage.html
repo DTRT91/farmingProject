@@ -48,11 +48,21 @@
                 <div class="row gy-10 gx-10">
                     <div class="service-item d-flex flex-column h-60">
                         <div class="tableTitle">저장 매출 목록</div>
+                            <div class="col-sm-12 d-flex flex-row-reverse bd-highlight">
+                                <input type="button" class="btn btn-secondary" id="historyLoad" value="저장된 매출 불러오기">
+                            </div>
 
-                        <div th:each="revenue : ${revenueList}" class="form-check form-check-inline">
-                            <input type="text" name="areaId" th:value="${revenue.areaId}">
-                            <input type="text" name="salesResult" th:value="${revenue.salesResult}">
-                            <input type="text" name="preSalesResult" th:value="${revenue.preSalesResult}">
+                        <table class="table table-bordered table-hover table-primary" id="myTable">
+                            <thead class="thead-dark text-center">
+                            <tr>
+                                <th class="tableCropId">작물 번호</th>
+                                <th class="tableAreaId">지역 번호</th>
+                                <th class="tableRevenue">연매출(원/10a)</th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center table-secondary" id="revenueTable">
+                            </tbody>
+                        </table>
                         </div>
 
                 </div>

@@ -32,7 +32,6 @@ public class RevenueServiceImpl implements RevenueService {
     public List<FarmHistorySaveDto> getCropAreaRevenue(FarmHistorySaveDto farmHistorySaveDto) {
         return revenueDao.getCropAreaRevenue(farmHistorySaveDto);
     }
-
 }
 
 

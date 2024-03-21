@@ -17,4 +17,5 @@ public interface RevenueDao {
 
     List<FarmHistorySaveDto> getCropAreaRevenue(FarmHistorySaveDto farmHistorySaveDto);
 
+
 }

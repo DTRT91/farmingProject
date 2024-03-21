@@ -27,16 +27,16 @@ const login = {
          const parsedData = JSON.parse(data);
          console.log(parsedData)
 
-      if(parsedData.message) {
-        console.log('fail')
-        if(parsedData.message === 'Invalid password') return alert('비밀번호를 확인하세요');
-        else if(parsedData.message === 'No user registered with this details!') return alert('아이디와 비밀번호를 확인하세요');
-      }
-      else {
+        if(parsedData) {
         console.log('success')
         console.log(data);
         location.href = '/main';
-      }
+
+        }
+        else {
+        console.log('fail')
+        return alert('아이디와 비밀번호를 확인하세요');
+        }
     })
     .catch(error => {
       console.log(error)

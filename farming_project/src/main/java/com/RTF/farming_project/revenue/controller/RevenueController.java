@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,26 +23,33 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-
 public class RevenueController {
 
     private final RevenueService revenueServiceImpl;
 
 
     @GetMapping("/revenue")
-    public String revenue(Model model, HttpSession session){
+    public String revenue(Model model, HttpSession session, HttpServletResponse response) throws IOException {
 
         LoginDto loginUser = (LoginDto) session.getAttribute("loginUser");
 
-        List<FarmCropDto> cropList = new ArrayList<>();
-        FarmCropDto farmCropDto = new FarmCropDto();
-        cropList = revenueServiceImpl.getCropList();
+        if (loginUser == null) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script> alert('로그인이 필요합니다.');");
+            out.println("location.href='/main'; </script>");
+            out.close();
+            return "main";
+        } else {
+            List<FarmCropDto> cropList = new ArrayList<>();
+            FarmCropDto farmCropDto = new FarmCropDto();
+            cropList = revenueServiceImpl.getCropList();
 
-        model.addAttribute("cropId", farmCropDto.getCropId());
-        model.addAttribute("cropList", cropList);
-        model.addAttribute("loginUser", loginUser);
-        log.info("세션 확인" + loginUser.getUserid());
-        return "revenue/revenue";
+            model.addAttribute("cropId", farmCropDto.getCropId());
+            model.addAttribute("cropList", cropList);
+            model.addAttribute("loginUser", loginUser);
+            return "revenue/revenue";
+        }
     }
-
 }

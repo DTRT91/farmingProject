@@ -5,6 +5,6 @@
     <select id="verifyUser" parameterType="com.RTF.farming_project.login.dto.LoginRequestDto" resultType="com.RTF.farming_project.login.dto.LoginDto">
         SELECT *
         FROM USERS
-        WHERE userid = #{memberId}
+        WHERE userid = #{memberId} AND password = #{memberPassword}
     </select>
 </mapper>

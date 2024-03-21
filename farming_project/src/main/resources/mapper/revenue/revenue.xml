@@ -27,4 +27,5 @@
         where rresource.cid =#{cropId} AND rresource.rid=#{areaId}
         order by rresource.year
     </select>
+
 </mapper>

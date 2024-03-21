@@ -13,4 +13,6 @@ public interface RevenueService {
     List<FarmCropDto> getCropList();
     List<FarmCropAreaDto> getAreaList(int cropId);
     List<FarmHistorySaveDto> getCropAreaRevenue(FarmHistorySaveDto farmHistorySaveDto);
+
+
 }

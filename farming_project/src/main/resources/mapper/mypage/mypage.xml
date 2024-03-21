@@ -11,4 +11,10 @@
         FROM USERS
         WHERE userid = #{userid}
     </update>
+
+    <select id="historyLoad" parameterType="String" resultType="com.RTF.farming_project.revenue.dto.FarmHistorySaveDto">
+        SELECT cropId, areaId, salesResult
+        FROM saleshistory
+        where userid = #{userId}
+    </select>
 </mapper>
